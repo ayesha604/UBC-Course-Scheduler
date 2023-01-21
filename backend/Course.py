@@ -2,7 +2,7 @@ from Section import *
 
 class Course:
     courseName = ""
-    sections = {} # {"name": Section}
+    sections = [] # [Section]
     creditsNum = 0
 
     def __init__(self, courseName: str) -> None:
