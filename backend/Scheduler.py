@@ -6,7 +6,8 @@ class Scheduler:
     timetables = []
 
     def __init__(self) -> None:
-        pass
+        """create a scheduler"""
+        return
 
     def schedule(self, inputCourses: list[Course]) -> list[Timetable]:
         """create all possible timetables from the given courses (in order)"""
@@ -21,4 +22,4 @@ class Scheduler:
 
     def getTimetables(self) -> list[Timetable]:
         """return the possible timetables (in order)"""
-        pass
+        return self.timetables.copy()
