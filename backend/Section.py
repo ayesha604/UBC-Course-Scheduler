@@ -1,36 +1,46 @@
+from typing import TypeVar
+T = TypeVar('T', bound="Section")
+
 class Section:
     sectionName = ""
-    day = ""
-    startTime = 0
-    endTime = 0
+    time = {} # {"day": (startTime, endTime)}
     term = 1 # 1 or 2
     location = ""
     professor = ""
     dependencies = [] # [Section]
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, sectionName:str, time: dict[str : tuple[int, int]],\
+        term: int, location: str, professor: str, dependencies: list[T]) -> None:
+        """Create a section with all the necessaryh information"""
+        self.sectionName = sectionName
+        self.time = time
+        self.term = term
+        self.location = location
+        self.professor = professor
+        self.dependencies = dependencies
+        return
+
 
     def getSectionName(self) -> str:
         """return section name"""
-        pass
+        return self.sectionName
 
-    def getTime(self) -> dict[str: tuple(int, int)]:
+    def getTime(self) -> dict[str: tuple[int, int]]:
         """Return a dict with day as key and (start, end) as value""" 
-        pass
+        return self.time.copy()
 
     def getTerm(self) -> int:
         """return the term the section is offered in"""
-        pass
+        return self.term
 
     def getLocation(self) -> str:
         """return the building the section is offered in"""
-        pass
+        return self.location
 
     def getProf(self) -> str:
         """return the instructor's name"""
-        pass
+        return self.professor
 
-    def getDependencies(self) -> list[str]:
+    def getDependencies(self) -> list[T]:
         """return a list of dependencies (e.g., labs, tutorials, etc.)"""
-        pass
+        return self.dependencies.copy()
