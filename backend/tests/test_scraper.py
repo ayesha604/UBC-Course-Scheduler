@@ -3,7 +3,8 @@ from backend.Scraper import Scraper
 
 def main():
     s = Scraper()
-    print(s.scrape_deps())
+    s.scrape_deps()
+    print(s.get_departments())
 
 
 if __name__ == '__main__':
