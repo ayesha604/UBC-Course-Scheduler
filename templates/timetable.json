@@ -1,0 +1,18 @@
+{
+    "timetables" : [{
+        "timetable" : {
+            "sections" : [{
+                "section" : {
+                    "name" : "",
+                    "day" : "",
+                    "start-time" : "",
+                    "end-time" : "",
+                    "location" : "",
+                    "professors" : "",
+                    "states" : ""
+                }
+            }],
+            "score" : 0
+        }
+    }]
+}
