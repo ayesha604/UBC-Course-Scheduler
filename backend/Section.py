@@ -52,3 +52,6 @@ class Section:
     
     def getRequirements(self) -> list[str]:
         return self.requirements.copy()
+    
+    def getSectionType(self) -> str:
+        return self.sectionType

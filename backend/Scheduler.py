@@ -1,3 +1,4 @@
+import itertools
 from Timetable import *
 from Section import *
 from Course import *
@@ -19,8 +20,23 @@ class Scheduler:
                 allSections = currCourse.getSections()
                 for section in allSections:
                     newTimetable = Timetable(timetable.getSections())
+                    
                     if newTimetable.addSection(section):
-                        dfs(inputCourses[1:], newTimetable)
+                        dependencies = []
+                        for r in section.getRequirements():
+                            dependencies.append(list(filter(lambda d: d.getSectionType() == r, section.getDependencies())))
+                        
+                        allCombinations = list(itertools.product(*dependencies))
+                        if len(allCombinations) != 0:
+                            for comb in allCombinations:
+                                tempTimetable = Timetable(newTimetable.getSections())
+                                for s in comb:
+                                    if not tempTimetable.addSection(s):
+                                        continue
+                                dfs(inputCourses[1:], tempTimetable)
+                                
+                        else:
+                            dfs(inputCourses[1:], newTimetable)
                 
         
         dfs(inputCourses, Timetable([], 0))
