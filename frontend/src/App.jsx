@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { sendCourses } from './util/api.js'
 import './App.scss'
-import Nav from './components/Nav'
+import Sidebar from './components/sidebar'
 import Container from 'react-bootstrap/Container'
+import Nav from './components/Nav'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TimetableCarousel from './components/TimetableCarousel'
 import TimetablePlaceholder from './components/TimetablePlaceholder.jsx'
+
 
 const prefetchCourseURL = 'http://127.0.0.1:5000/valid_courses'
 
@@ -90,9 +92,9 @@ function App() {
   //   }
   // ]
 
-  async function handleGetTimetables() {
+  async function handleGetTimetables(courses, term) {
     setLoading(true)
-    setTimetables((await sendCourses(["CPSC 110", "PHYS 117"], 1)).timetables)
+    setTimetables((await sendCourses(courses, term)).timetables)
     setLoading(false)
   }
 
@@ -117,8 +119,7 @@ function App() {
         <Row>
           <Col className="sidebar">
             <Container>
-              Text
-              <button onClick={handleGetTimetables}>Click</button>
+              <Sidebar onSubmit={handleGetTimetables} />
             </Container>
           </Col>
           <Col md={9}>
