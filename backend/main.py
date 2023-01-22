@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from backend.objects.CoursesLoader import CoursesLoader
-
+from backend.objects.Scheduler import Scheduler
 
 SAVED_COURSES_PATH = './backend/saved_json/saved_courses.json'
 
@@ -28,7 +28,12 @@ def main():
     @cross_origin()
     def schedule():
         data = request.get_json()['courses']
-        return data
+        course_names = data['courses']
+        courses = loader.get_courses_from_names(course_names)
+        scheduler = Scheduler()
+        # TODO: pass in term
+        scheduler.schedule(courses, 1)
+        ...
 
     app.run(debug=True, port=5000)
 
