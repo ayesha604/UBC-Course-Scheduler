@@ -4,11 +4,14 @@ class Timetable:
     sections = []
     score = 0
 
-    def __init__(self, sections: list[Section], score: int) -> None:
+    def __init__(self, sections: list[Section], score=0) -> None:
         """create a timetable with a given score"""
         self.sections = sections
         self.score = score
         return
+
+    def setScore(self, newScore: int) -> None:
+        self.score = newScore
 
     def getScore(self) -> int:
         """return the score for the timetable"""
