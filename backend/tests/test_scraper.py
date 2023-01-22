@@ -1,13 +1,15 @@
 from backend.Scraper import Scraper
 
+TO_SCRAPE = 'CPSC'
+
 
 def main():
     s = Scraper()
     # s.scrape_deps()
-    # print(s.get_departments())
-    # s.scrape_course_names('AANB')
-    # print(s.get_courses())
-    s.scrape_all()
+    # for dep in TO_SCRAPE:
+    #     s.scrape_course_names(dep)
+    # print(s.get_course_names())
+    s.scrape_course('CPSC 110')
     # print(s.get_courses())
 
 
