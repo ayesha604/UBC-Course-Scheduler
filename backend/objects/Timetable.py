@@ -1,5 +1,4 @@
 from backend.objects.Section import *
-from backend.objects.NewSection import *
 
 class Timetable:
     sections = []

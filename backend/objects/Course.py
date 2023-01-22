@@ -1,7 +1,6 @@
 import dataclasses
-import json
 
-from backend.objects.NewSection import Section
+from backend.objects.Section import Section
 
 class Course:
     courseName = ""

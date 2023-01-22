@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-from backend.objects.NewSection import Section
+from backend.objects.Section import Section
 from backend.objects.Course import Course
 
 # sorry ubc

@@ -1,8 +1,7 @@
 import json
-from dacite import from_dict
 
 from backend.objects.Course import Course
-from backend.objects.NewSection import Section
+from backend.objects.Section import Section
 
 
 def course_from_dict(course_dict: dict) -> Course:
