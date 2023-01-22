@@ -1,4 +1,6 @@
-from backend.objects.NewSection import *
+import dataclasses
+
+from backend.objects.Section import Section
 
 class Course:
     courseName = ""
@@ -6,7 +8,7 @@ class Course:
     creditsNum = 0
     requirements = []
 
-    def __init__(self, courseName: str, sections: list[Section], requirements: list[str],creditsNum: int) -> None:
+    def __init__(self, courseName: str, sections: list[Section], requirements: list[str], creditsNum: int) -> None:
         """Create a course object"""
         self.courseName = courseName
         self.sections = sections
@@ -31,3 +33,11 @@ class Course:
 
     def getRequirements(self) -> list[str]:
         return self.requirements.copy()
+
+    def to_dict(self):
+        section_list = [dataclasses.asdict(s) for s in self.getSections()]
+        d = {'name': self.getCourseName(),
+             'sections': section_list,
+             'requirements': self.getRequirements(),
+             'credits': self.getCredits()}
+        return d
