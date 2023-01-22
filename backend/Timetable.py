@@ -13,9 +13,20 @@ class Timetable:
     def setScore(self, newScore: int) -> None:
         self.score = newScore
 
-    def addSection(self, section: Section) -> None:
+    def addSection(self, newSection: Section) -> bool:
+        """Add section to the timetable. Return true if added sucessfully, false otherwise"""
+        newSectionTime = newSection.getTime()
+        for section in self.sections:
+            currSectionTime = section.getTime()
+            for day in currSectionTime.keys():
+                newTime = newSectionTime.get(day)
+                currTime = currSectionTime.get(day)
+                if newTime is not None and \
+                    not ((newTime[1] < currTime[0]) or (newTime[0] > currTime[1])):
+                    return False
+
         self.sections.append(Section)
-        return
+        return True
 
     def getScore(self) -> int:
         """return the score for the timetable"""
