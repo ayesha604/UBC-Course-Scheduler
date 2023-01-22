@@ -22,8 +22,9 @@ def main():
 
     @app.route('/schedule', methods=['POST'])
     def schedule():
-        data = request.get_json()['body']
-        return data
+        course_names = request.get_json()['courses']
+        print(course_names)
+        # return data
 
     app.run(debug=True, port=5000)
 
