@@ -1,0 +1,35 @@
+.btn-round {
+    display: flex;
+    background-color: #274082;
+    border: none;
+    border-radius: 50%;
+    padding: 1em;
+    align-items: center;
+}
+.btn-round:disabled {
+    background-color: #BABABA;
+}
+
+.btn-round:hover:enabled {
+    opacity: 80%;
+}
+.btn-round:active:enabled {
+    opacity: 60%;
+}
+.btn-round svg {
+    width: 16px;
+    height: 16px;
+    stroke: white;
+    fill: white;
+}
+.left svg {
+    transform: rotate(-90deg) translateY(-2px);
+}
+.right svg {
+    transform: rotate(90deg) translateY(-2px);
+}
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
