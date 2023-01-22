@@ -51,9 +51,9 @@ class Section:
     def getDependencies(self) -> list[T]:
         """return a list of dependencies (e.g., labs, tutorials, etc.)"""
         return self.dependencies.copy()
-
-    def setDependencies(self, dependencies: list[T]):
-        self.dependencies = dependencies
-
-    def getStatus(self) -> str:
-        return self.status
+    
+    def getRequirements(self) -> list[str]:
+        return self.requirements.copy()
+    
+    def getSectionType(self) -> str:
+        return self.sectionType
