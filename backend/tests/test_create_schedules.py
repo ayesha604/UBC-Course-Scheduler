@@ -2,11 +2,10 @@ import json
 
 from backend.objects.CoursesLoader import CoursesLoader
 from backend.objects.Scheduler import Scheduler
-from backend.objects.Scraper import Scraper
 
 SAVED_COURSES_PATH = 'backend/saved_json/saved_courses.json'
 SAVED_TIMETABLES_PATH = 'backend/saved_json/saved_timetables.json'
-TO_LOAD = ['CPSC 110', 'MATH 100']
+TO_LOAD = ['CPSC 110', 'MATH 100', 'COGS 200', 'PHYS 117']
 NUM_TABLES = 10
 
 

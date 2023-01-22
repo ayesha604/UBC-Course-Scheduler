@@ -1,6 +1,6 @@
 # UBC-Course-Scheduler
 ## Description
-Our submission to nwHacks 2023! With most of the team members being new to hackathons, we are very excited to present the UBC Course Scheduler. This project is inspired by the process of picking first-year classes before coming here to UBC. As vividly remembered, choosing first ever uni classes are full of thrill and anticipation, but not so much for creating the worklists. Picking and fitting classes into the schedule can be very arduous, and quite frankyl, boring. As such, we've created a way for both upcoming and current UBC students to create many different schedules based on their favourite classes. Don't worry, we are ranking the schedules according to common criteria to give you the best one possible. 
+Our submission to nwHacks 2023! With all of the team members being new to hackathons, we are very excited to present the UBC Course Scheduler. This project was inspired by the process of picking first-year classes before coming here to UBC. As we vividly remember, choosing our first ever uni classes was full of thrill and anticipation, but not so much for creating the worklists. Picking and fitting sections into the schedule can be very arduous, and quite frankly, boring. As such, we've created a way for both upcoming and current UBC students to create many different schedules with their favourite classes. Don't worry, we are ranking the schedules according to common criteria to give you the best one possible. 
 
 ## How it works
 - The Scraper
