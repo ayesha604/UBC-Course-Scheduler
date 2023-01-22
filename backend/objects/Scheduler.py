@@ -53,7 +53,7 @@ class Scheduler:
                         else:
                             dfs(inputCourses[1:], newTimetable, targetSize)
         currTargetSize = self.SUB_MAX_TIMETABLES
-        while len(self.timetables) != self.MAX_TIMETABLES:
+        while currTargetSize != self.MAX_TIMETABLES:
             dfs(inputCourses, Timetable([], 0), currTargetSize)
             currTargetSize += self.SUB_MAX_TIMETABLES
         self.rankTimetables()

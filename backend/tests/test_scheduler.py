@@ -4,13 +4,13 @@ from backend.objects.Scraper import Scraper
 from backend.objects.Timetable import Timetable
 
 if __name__ == "__main__":
-    courseToScrape = ['CPSC 110','PHYS 117', 'CPSC 121', 'MATH 100']
+    courseToScrape = ['CPSC 110', 'CPSC 121']
     scraper = Scraper()
     scraper.scrape_course_list(courseToScrape)
 
     coursesToSchedule = list(scraper.get_courses().values())
     scheduler = Scheduler()
-    scheduler.schedule(coursesToSchedule, 1)
+    scheduler.schedule(coursesToSchedule, 2)
     timetables = scheduler.getTimetables()
 
     # print(len(timetables))
