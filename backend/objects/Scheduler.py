@@ -1,7 +1,7 @@
 import itertools
-from objects.Timetable import *
-from objects.NewSection import *
-from objects.Course import *
+from backend.objects.Timetable import *
+from backend.objects.NewSection import *
+from backend.objects.Course import *
 
 class Scheduler:
     timetables = []

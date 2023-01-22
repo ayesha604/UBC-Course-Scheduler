@@ -1,11 +1,10 @@
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from objects.Course import Course
-from objects.Scheduler import Scheduler
-from objects.Scraper import Scraper
-from objects.Section import Section
-from objects.Timetable import Timetable
+from backend.objects.Course import Course
+from backend.objects.Scheduler import Scheduler
+from backend.objects.Scraper import Scraper
+from backend.objects.Section import Section
+from backend.objects.Timetable import Timetable
 
 
 def getMATH100Sections() -> list[Section]:

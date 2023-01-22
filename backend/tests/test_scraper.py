@@ -1,4 +1,4 @@
-from objects.Scraper import Scraper
+from backend.objects.Scraper import Scraper
 
 TO_SCRAPE = ['CPSC 110', 'CPSC 121', 'MATH 100']
 
