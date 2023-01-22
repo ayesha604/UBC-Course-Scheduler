@@ -1,12 +1,13 @@
 import dataclasses
 import json
 
-from backend.NewSection import Section
+from backend.objects.NewSection import Section
 
 class Course:
     courseName = ""
     sections = [] # [Section]
     creditsNum = 0
+    requirements = []
 
     def __init__(self, courseName: str, sections: list[Section], requirements: list[str], creditsNum: int) -> None:
         """Create a course object"""

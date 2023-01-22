@@ -14,7 +14,7 @@ class Section:
 
     def __init__(self, sectionName:str, time: dict[str : tuple[int, int]],\
         term: int, location: str, professor: str, dependencies: list[T],\
-            sectionType: str, requires: list[str], status: str) -> None:
+            sectionType: str, requires: list[str]) -> None:
         """Create a section with all the necessary information"""
         self.sectionName = sectionName
         self.time = time
@@ -24,7 +24,6 @@ class Section:
         self.dependencies = dependencies
         self.sectionType = sectionType
         self.requirements = requires
-        self.status = status
         return
 
 
@@ -51,9 +50,9 @@ class Section:
     def getDependencies(self) -> list[T]:
         """return a list of dependencies (e.g., labs, tutorials, etc.)"""
         return self.dependencies.copy()
-
-    def setDependencies(self, dependencies: list[T]):
-        self.dependencies = dependencies
-
-    def getStatus(self) -> str:
-        return self.status
+    
+    def getRequirements(self) -> list[str]:
+        return self.requirements.copy()
+    
+    def getSectionType(self) -> str:
+        return self.sectionType

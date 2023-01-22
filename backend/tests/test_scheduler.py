@@ -1,9 +1,11 @@
-import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from Course import Course
-from Scheduler import Scheduler
-from Section import Section
-from Timetable import Timetable
+import os
+import sys
+from backend.objects.Course import Course
+from backend.objects.Scheduler import Scheduler
+from backend.objects.Scraper import Scraper
+from backend.objects.Section import Section
+from backend.objects.Timetable import Timetable
+
 
 def getMATH100Sections() -> list[Section]:
     sectionA11 = Section("MATH 100 A11", {"Mon":(1100, 1200)}, 1,\
@@ -119,20 +121,27 @@ def getPHYS119Sections() -> list[Section]:
         sectionL2A, sectionL2B, sectionL2C, sectionL2D, sectionL2E, sectionL2F, sectionL2G]
 
 if __name__ == "__main__":
-    math100Sections = getMATH100Sections()
-    phys117Sections = getPHYS117Sections()
-    phys119Sections = getPHYS119Sections()
+    courseToScrape = ['CPSC 110', 'CPSC 121', 'PHYS 119', 'MATH 100']
+    scraper = Scraper()
+    scraper.set_course_names(courseToScrape)
+    scraper.scrape_all_courses()
+    # print(scraper.get_courses())
 
-    math100 = Course("MATH 100", math100Sections, 3)
-    phys117 = Course("PHYS 117", phys117Sections, 3)
-    phys119 = Course("PHYS 119", phys119Sections, 1)
+    # math100Sections = getMATH100Sections()
+    # phys117Sections = getPHYS117Sections()
+    # phys119Sections = getPHYS119Sections()
 
-    coursesToSchedule = [math100, phys117, phys119]
+    # math100 = Course("MATH 100", math100Sections, 3)
+    # phys117 = Course("PHYS 117", phys117Sections, 3)
+    # phys119 = Course("PHYS 119", phys119Sections, 1)
+
+    coursesToSchedule = list(scraper.get_courses().values())
     scheduler = Scheduler()
-    scheduler.schedule(coursesToSchedule)
+    scheduler.schedule(coursesToSchedule, 1)
     timetables = scheduler.getTimetables()
 
     for timetable in timetables:
         sections = timetable.getSections()
         for section in sections:
             print(f"{section.getSectionName()} : {section.getTime()}")
+        print()
