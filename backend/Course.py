@@ -1,4 +1,7 @@
-from backend.Section import *
+import dataclasses
+import json
+
+from backend.NewSection import Section
 
 class Course:
     courseName = ""
@@ -30,3 +33,11 @@ class Course:
 
     def getRequirements(self) -> list[str]:
         return self.requirements.copy()
+
+    def to_dict(self):
+        section_list = [dataclasses.asdict(s) for s in self.getSections()]
+        d = {'name': self.getCourseName(),
+             'sections': section_list,
+             'requirements': self.getRequirements(),
+             'credits': self.getCredits()}
+        return d

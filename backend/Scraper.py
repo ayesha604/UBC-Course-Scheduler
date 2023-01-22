@@ -32,6 +32,11 @@ def is_section(tag: bs4.Tag) -> bool:
     return tag.name == 'tr' and tag.has_attr('class')
 
 
+def is_dependent(tag: bs4.Tag) -> bool:
+    return tag.has_attr('class') and tag['class'] == ['section2'] and \
+        "Waiting List" not in tag.text
+
+
 def make_section(tag: bs4.Tag) -> Section:
     subs = list(tag.children)
     status = subs[0].text
@@ -73,7 +78,7 @@ def scrape_course(course_name: str) -> Course:
         lecture_section = make_section(lecture_tag)
         dependencies = []
         next_tag = lecture_tag.next_sibling
-        while type(next_tag) == bs4.Tag and next_tag.has_attr('class') and next_tag['class'] == ['section2']:
+        while type(next_tag) == bs4.Tag and is_dependent(next_tag):
             new_dep = make_section(next_tag)
             if new_dep.activity not in requirements:
                 requirements.append(new_dep.activity)
