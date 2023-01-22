@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
+from backend.NewSection import Section
 from backend.Course import Course
 
 # sorry ubc
@@ -23,11 +24,59 @@ def make_soup(url: str) -> BeautifulSoup:
 
 
 def is_lecture(tag: bs4.Tag):
-    return "Lecture" in tag.text
+    return tag.has_attr('class') and tag['class'] == ['section1'] and "Lecture" in tag.text
 
 
 def is_section(tag: bs4.Tag) -> bool:
     return tag.name == 'tr' and tag.has_attr('class')
+
+
+def make_section(tag: bs4.Tag) -> Section:
+    subs = list(tag.children)
+    status = subs[0].text
+    name = subs[1].a.text
+    activity = subs[2].text
+    term = int(subs[3].text)
+    mode = subs[4].text.strip()
+
+    days = subs[6].text.strip()
+    start_time = int(subs[7].text.replace(':', ''))
+    end_time = int(subs[8].text.replace(':', ''))
+
+    times = {}
+    for day in days.split():
+        times[day] = (start_time, end_time)
+
+    # print(status, name, activity, term, mode, times)
+    return Section(status, name, activity, term, mode, times)
+
+
+def scrape_course(course_name: str) -> Course:
+    """
+    Scrape a Course object from a course name.
+
+    Assumes that lectures are main courses, and every non-lecture underneath them
+    is a dependency for that lecture section.
+    """
+    department, number = course_name.split(" ")
+    url = COURSE_URL + department + COURSE_URL_ADD + number
+    soup = make_soup(url)
+    print(url)
+
+    sections = []
+
+    lecture_tags = soup.find_all(is_lecture)
+    for lecture_tag in lecture_tags:
+        lecture_section = make_section(lecture_tag)
+        dependencies = []
+        next_tag = lecture_tag.next_sibling
+        while type(next_tag) == bs4.Tag and next_tag.has_attr('class') and next_tag['class'] == ['section2']:
+            dependencies.append(make_section(next_tag))
+            next_tag = next_tag.next_sibling
+        lecture_section.dependencies = dependencies
+        sections.append(lecture_section)
+
+    return Course(course_name, sections, None)
 
 
 class Scraper:
@@ -69,26 +118,7 @@ class Scraper:
 
     def scrape_all_courses(self):
         for course_name in self.course_names:
-            self.courses[course_name] = self.scrape_course(course_name)
-
-    def scrape_course(self, course_name: str) -> Course:
-        """
-        Scrape a Course object from a course name.
-
-        Assumes that lectures are main courses, and every non-lecture underneath them
-        is a dependency for that lecture section.
-        """
-        department, number = course_name.split(" ")
-        url = COURSE_URL + department + COURSE_URL_ADD + number
-        soup = make_soup(url)
-        print(url)
-
-        # start with first section, assume it is a lecture tag
-        start_tag = soup.find(is_section)
-        lecture_tags = [start_tag]
-        lecture_tags += start_tag.find_next_siblings(is_lecture)
-        for tag in lecture_tags:
-            print(tag)
+            self.courses[course_name] = scrape_course(course_name)
 
     def get_departments(self) -> list[str]:
         return self.deps
@@ -98,3 +128,6 @@ class Scraper:
 
     def get_course_names(self) -> list[str]:
         return self.course_names
+
+    def set_course_names(self, course_names: list[str]):
+        self.course_names = course_names.copy()

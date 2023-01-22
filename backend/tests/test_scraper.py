@@ -1,6 +1,6 @@
 from backend.Scraper import Scraper
 
-TO_SCRAPE = 'CPSC'
+TO_SCRAPE = ['CPSC 110']
 
 
 def main():
@@ -9,7 +9,9 @@ def main():
     # for dep in TO_SCRAPE:
     #     s.scrape_course_names(dep)
     # print(s.get_course_names())
-    s.scrape_course('CPSC 110')
+    s.set_course_names(TO_SCRAPE)
+    s.scrape_all_courses()
+    print(s.courses['CPSC 110'])
     # print(s.get_courses())
 
 

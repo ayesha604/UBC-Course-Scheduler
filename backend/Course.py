@@ -12,6 +12,9 @@ class Course:
         self.creditsNum = creditsNum
         return
 
+    def __str__(self):
+        return f'name={self.courseName}, sections={self.sections}'
+
     def getSections(self) -> list[Section]:
         """return a list of all Sections offered for this course"""
         return self.sections.copy()
