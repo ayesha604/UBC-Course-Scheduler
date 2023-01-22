@@ -49,6 +49,7 @@ class Scheduler:
                             dfs(inputCourses[1:], newTimetable)
         
         dfs(inputCourses, Timetable([], 0))
+        self.rankTimetables()
 
         
 
@@ -93,12 +94,14 @@ class Scheduler:
 
     def spaceBetweenTime(self, slotOne: int, slotTwo: int) -> int:
         """Return space between two time in units of 30 minutes"""
-        return int((slotOne - slotTwo)/100) + (slotOne - slotTwo) % 100 / 70
+        difference = slotOne - slotTwo
+        extra = 1 if difference % 100 != 0 else 0
+        return int(difference/100) + extra
 
 
     def rankTimetables(self) -> None:
         """rank the timeTables based on score (in place)"""
-        pass
+        self.timetables.sort(key=lambda t: t.getScore(), reverse=True)
 
     def getTimetables(self) -> list[Timetable]:
         """return the possible timetables (in order)"""
