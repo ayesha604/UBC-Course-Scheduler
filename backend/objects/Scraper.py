@@ -1,3 +1,5 @@
+import re
+
 import bs4
 from bs4 import BeautifulSoup
 import requests
@@ -16,6 +18,7 @@ DEP_URL = "https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tnam
 COURSE_URL = "https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept="
 COURSE_URL_ADD = "&course="
 SLEEP_TIME = 0.5
+TIME_PATTERN = re.compile(r'\d+:\d+')
 
 
 def make_soup(url: str) -> BeautifulSoup:
@@ -23,18 +26,25 @@ def make_soup(url: str) -> BeautifulSoup:
     return BeautifulSoup(page, "lxml")
 
 
+def has_times(tag: bs4.Tag):
+    subs = list(tag.children)
+    start_time = subs[7]
+    return TIME_PATTERN.match(start_time.text)
+
+
 def is_lecture(tag: bs4.Tag):
-    return tag.has_attr('class') and tag['class'] == ['section1'] \
-        and "Lecture" in tag.text and "STT" not in tag.text
+    return is_section(tag) and "Lecture" in tag.text and "STT" not in tag.text
 
 
 def is_section(tag: bs4.Tag) -> bool:
-    return tag.name == 'tr' and tag.has_attr('class')
+    return tag.name == 'tr' and tag.has_attr('class') \
+        and has_times(tag) \
+        and (tag['class'] == ['section1'] or tag['class'] == ['section2'])
 
 
-def is_dependent(tag: bs4.Tag) -> bool:
-    return tag.has_attr('class') and tag['class'] == ['section2'] and \
-        "Waiting List" not in tag.text
+def is_dependent(tag: bs4.Tag, parent_tag: bs4.Tag) -> bool:
+    return is_section(tag) \
+        and "Waiting List" not in tag.text and "Lecture" not in tag.text
 
 
 def make_section(tag: bs4.Tag) -> Section:
@@ -77,13 +87,15 @@ def scrape_course(course_name: str) -> Course:
     for lecture_tag in lecture_tags:
         lecture_section = make_section(lecture_tag)
         dependencies = []
+
         next_tag = lecture_tag.next_sibling
-        while type(next_tag) == bs4.Tag and is_dependent(next_tag):
+        while type(next_tag) == bs4.Tag and is_dependent(next_tag, lecture_tag):
             new_dep = make_section(next_tag)
             if new_dep.activity not in requirements:
                 requirements.append(new_dep.activity)
             dependencies.append(new_dep)
             next_tag = next_tag.next_sibling
+
         lecture_section.dependencies = dependencies
         sections.append(lecture_section)
 

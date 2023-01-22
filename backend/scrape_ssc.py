@@ -9,7 +9,8 @@ PATH = './backend/saved_json/saved_courses.json'
 
 def main():
     scraper = Scraper()
-    scraper.scrape_course_list(COURSES_TO_SCRAPE)
+    # scraper.scrape_course_list(COURSES_TO_SCRAPE)
+    scraper.scrape_course('CPSC 110')
     courses = scraper.get_courses()
 
     data = {}
