@@ -12,3 +12,9 @@ $theme-colors: (
 .App {
     height: 100%;
 }
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-right: 1px solid #DCDCDC;
+}

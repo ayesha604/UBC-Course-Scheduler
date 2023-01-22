@@ -7,9 +7,9 @@ export default function Nav() {
 
     return (
         <Navbar bg="light">
-            <Container>
+            <Container fluid>
                 <Navbar.Brand as="div">
-                    <h1 class="logo">
+                    <h1 className="logo">
                         UBC Course Scheduler
                     </h1>
                 </Navbar.Brand>
