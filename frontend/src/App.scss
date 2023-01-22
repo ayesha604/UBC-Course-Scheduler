@@ -7,5 +7,19 @@ $theme-colors: (
     "light": #F6F4E1
 );
 
-
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.App {
+    height: 100%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-right: 1px solid #DCDCDC;
+}
+.inactive {
+    margin: 2em;
+    color: grey;
+}

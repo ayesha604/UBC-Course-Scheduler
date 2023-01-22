@@ -1,0 +1,155 @@
+.score-hi {
+    color: green;
+}
+.score-med {
+    color: orange;
+}
+.score-low {
+    color: red;
+}
+.semibold {
+    font-weight: 500;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 2em;
+}
+table {
+    margin: 1em 0;
+    table-layout: fixed;
+    width: 100%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+
+// th:first-of-type {
+//     border-top-left-radius: 6px;
+// }
+// th:last-of-type {
+//     border-top-right-radius: 6px;
+// }
+// tr:last-of-type td:first-of-type {
+//     border-bottom-left-radius: 6px;
+// }
+// tr:last-of-type td:last-of-type {
+//     border-bottom-right-radius: 6px;
+// }
+
+th,
+td {
+    border: 2px solid #F6F4E1;
+    text-align: center;
+}
+table tr:first-child th {
+    border-top: 0;
+}
+
+table tr:last-child td {
+    border-bottom: 0;
+}
+
+table tr td:first-child,
+table tr th:first-child {
+    border-left: 0;
+}
+
+table tr td:last-child,
+table tr th:last-child {
+    border-right: 0;
+}
+th,
+td {
+    background-color: white;
+}
+tr:nth-child(odd) td {
+    border-bottom-width: 1px;
+}
+tr:nth-child(even) td {
+    border-top-width: 1px;
+}
+
+thead tr th {
+    padding: .5em 0;
+}
+.times {
+    width: 7%;
+}
+tr {
+    height: 1.1em;
+    overflow: hidden;
+}
+td.time {
+    padding: 0.5em .7em;
+}
+td.time-text {
+    padding: .1em .7em;
+    font-size: x-small;
+    height: .5em;
+}
+td.section-slot {
+    padding-left: 0.2em;
+    text-align: left;
+    vertical-align: top;
+    user-select: none;
+}
+td.section-slot:hover {
+    opacity: 80%;
+}
+td.section-slot:active {
+    opacity: 60%;
+}
+td.section-slot p.slot-title {
+    color: white;
+    margin-bottom: 0;
+    font-size: small;
+    font-weight: 500;
+}
+td.section-slot p.slot-subtitle {
+    color: white;
+    margin-top: -2px;
+    margin-bottom: 0;
+    font-size: x-small;
+}
+
+.popover {
+    border: none;
+    border-radius: 6px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.popover-body .popover-heading {
+    font-size: medium;
+    font-weight: bold;
+}
+.popover-body .popover-line {
+    margin-bottom: 0;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #DFDFDF;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+.skeleton thead tr th,
+.skeleton tbody tr td {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
