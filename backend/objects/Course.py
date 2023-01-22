@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-from backend.objects.NewSection import *
-=======
 import dataclasses
 import json
 
 from backend.objects.NewSection import Section
->>>>>>> origin/main
 
 class Course:
     courseName = ""
