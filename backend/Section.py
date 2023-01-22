@@ -8,16 +8,19 @@ class Section:
     location = ""
     professor = ""
     dependencies = [] # [Section]
+    sectionType = ""
 
     def __init__(self, sectionName:str, time: dict[str : tuple[int, int]],\
-        term: int, location: str, professor: str, dependencies: list[T]) -> None:
-        """Create a section with all the necessaryh information"""
+        term: int, location: str, professor: str, dependencies: list[T],\
+            sectionType: str) -> None:
+        """Create a section with all the necessary information"""
         self.sectionName = sectionName
         self.time = time
         self.term = term
         self.location = location
         self.professor = professor
         self.dependencies = dependencies
+        self.sectionType = sectionType
         return
 
 
