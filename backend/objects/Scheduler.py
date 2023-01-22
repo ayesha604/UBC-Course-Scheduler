@@ -6,8 +6,8 @@ from backend.objects.Course import *
 
 class Scheduler:
     timetables = []
-    MAX_TIMETABLES = 100_000
-    SUB_MAX_TIMETABLES = MAX_TIMETABLES / 1000
+    MAX_TIMETABLES = 5000
+    SUB_MAX_TIMETABLES = MAX_TIMETABLES / 100
     EARLIEST_TIME = 800
     LATEST_TIME = 2200
     CUTOFF_TIME = (LATEST_TIME - EARLIEST_TIME) / 2 + EARLIEST_TIME
@@ -18,13 +18,16 @@ class Scheduler:
 
     def schedule(self, inputCourses: list[Course], term: int) -> None:
         """create all possible timetables from the given courses (in order)"""
+        memo = []
         def dfs(inputCourses: list[Course], timetable: Timetable, targetSize: int) -> None:
             if len(self.timetables) == targetSize:
                 return
             if len(inputCourses) == 0:
-                # print(len(self.timeTables))
-                timetable.setScore(self.calculateScore(timetable))
-                self.timetables.append(timetable)
+                sectionNamesInTimeTable = timetable.getSectionNames()
+                if sectionNamesInTimeTable not in memo:
+                    timetable.setScore(self.calculateScore(timetable))
+                    self.timetables.append(timetable)
+                    memo.append(sectionNamesInTimeTable)
             else:
                 currCourse = inputCourses[0]
                 allSections = currCourse.getSections()
