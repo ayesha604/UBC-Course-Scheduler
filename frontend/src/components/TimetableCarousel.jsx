@@ -102,7 +102,9 @@ export default function TimetableCarousel() {
                     <IoTriangleSharp />
                 </button>
                 <div >
-                    <Timetable sections={timetables[currentTimetable].sections} criteriaScore={timetables[currentTimetable].criteriaScore} num={currentTimetable} />
+                    <Timetable sections={timetables[currentTimetable].sections}
+                                criteriaScore={timetables[currentTimetable].criteriaScore}
+                                num={currentTimetable} />
                 </div>
                 
                 <button onClick={handleNextTimetable} className="btn-round right" disabled={currentTimetable === timetables.length - 1}>

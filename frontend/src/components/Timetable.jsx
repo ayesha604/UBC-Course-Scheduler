@@ -3,9 +3,10 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import './Timetable.scss'
 
-let weekdaysAbbrv = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-let weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-
+const weekdaysAbbrv = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+// blue, rust, light blue, purple, green, magenta
+const sectionColors = ["#2853C3", "#A72323", "#2D8DB7", "#7E259D", "#369D25", "#B727BA"]
 
 function makeTimes() {
     let times = []
@@ -60,7 +61,7 @@ function getDaysFilledWith(sections, times) {
     return daysWithTimes
 }
 
-export default function Timetable({ sections, criteriaScore, num }) {
+export default function Timetable({ sections, criteriaScore, num, sectionColor }) {
     let criteriaScoreColor = criteriaScore > 6.6 ? "score-hi" : 
                             criteriaScore > 3.3 ? "score-med" : "score-low"
 
@@ -102,7 +103,7 @@ export default function Timetable({ sections, criteriaScore, num }) {
                                                     <p className="popover-line"><span className="semibold">Time:</span> {sections[day[i].index]["days"].find((e) => e.day === weekdaysAbbrv[j]).times.join("-")}</p>
                                                     <p className="popover-line"><span className="semibold">Days:</span> {sections[day[i].index]["days"].map((e) => e.day).join(", ")}</p>
                                                 </Popover>}>
-                                                <td className="section-slot" rowSpan={day[i].rowSpan} style={{ backgroundColor: "#274082"}}>
+                                                <td className="section-slot" rowSpan={day[i].rowSpan} style={{ backgroundColor: sectionColors[day[i].index]}}>
                                                     <p className="slot-title">{sections[day[i].index]["name"]}</p>
                                                     <p className="slot-subtitle">{sections[day[i].index]["location"]}</p>
                                                 </td>
