@@ -7,12 +7,12 @@
                     "days" : [
                         {
                             "day": "",
-                            "times": ["[starttime]", "[endtime]"],
+                            "times": ["[starttime]", "[endtime]"]
                         }
-                    ]
+                    ],
                     "location" : "",
                     "professors" : [""],
-                    "states" : ""
+                    "status" : ""
                 }
             }],
             "score" : 0

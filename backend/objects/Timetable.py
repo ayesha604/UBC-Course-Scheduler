@@ -1,5 +1,6 @@
 from backend.objects.Section import *
 
+
 class Timetable:
     sections = []
     score = 0
@@ -22,7 +23,7 @@ class Timetable:
                 newTime = newSectionTime.get(day)
                 currTime = currSectionTime.get(day)
                 if newTime is not None and \
-                    not ((newTime[1] <= currTime[0]) or (newTime[0] >= currTime[1])):
+                        not ((newTime[1] <= currTime[0]) or (newTime[0] >= currTime[1])):
                     return False
 
         self.sections.append(newSection)
@@ -32,6 +33,12 @@ class Timetable:
         """return the score for the timetable"""
         return self.score
 
-    def getSections(self) -> None:
+    def getSections(self) -> list[Section]:
         """return a list of all sections in the timetable"""
         return self.sections.copy()
+
+    def to_dict(self) -> dict:
+        """Returns a dict formatted in the same way as timetable.json"""
+        section_list = [s.to_dict() for s in self.getSections()]
+        return {"timetable": {'sections': section_list,
+                              'score': self.getScore()}}

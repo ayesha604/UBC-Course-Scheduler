@@ -117,3 +117,8 @@ class Scheduler:
     def getTimetables(self) -> list[Timetable]:
         """return the possible timetables (in order)"""
         return self.timetables.copy()
+
+    def to_dict(self) -> dict:
+        """Return a dict formatted in the same way as timetable.json"""
+        timetables_list = [t.to_dict() for t in self.getTimetables()]
+        return {"timetables": timetables_list}

@@ -1,4 +1,6 @@
-from backend.NewSection import Section
+import dataclasses
+
+from backend.objects.Section import Section
 
 
 def main():
@@ -10,7 +12,7 @@ def main():
     s = Section(status=' ', name='MATH 100 1A1', activity='Lecture',
                 term=1, mode='In-Person', times={'Tue': (800, 1000)},
                 dependencies=[sub1, sub2])
-    print(s.to_json())
+    print(dataclasses.asdict(s))
 
 
 if __name__ == '__main__':

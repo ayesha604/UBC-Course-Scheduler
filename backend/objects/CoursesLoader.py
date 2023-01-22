@@ -26,14 +26,14 @@ def section_from_dict(section_dict: dict) -> Section:
     professor = section_dict['professor']
     dependencies = section_dict['dependencies']
 
+    dep_list = []
     if dependencies is not None:
-        dep_list = []
         for dep_dict in dependencies:
             dep = section_from_dict(dep_dict)
             dep_list.append(dep)
 
     return Section(status, name, activity, term, mode, times,
-                   location, professor, dependencies)
+                   location, professor, dep_list)
 
 
 class CoursesLoader:
