@@ -159,3 +159,15 @@ if __name__ == "__main__":
             print(f"{section.name} : {section.times}")
         print()
         
+    # for timetable in timetables:
+    #     sections = timetable.getSections()
+    #     # print(f"Timetable with score {timetable.getScore()}")
+    #     testFlag = True
+    #     for section in sections:
+    #         if section.name == "CPSC 110 L10":
+    #             testFlag = False
+    #         # print(f"{section.name} : {section.times}")
+    #     if testFlag:
+    #         print('aaaaaa')
+    #         break
+    #     # print()
