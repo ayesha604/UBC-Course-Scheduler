@@ -6,7 +6,7 @@ from backend.objects.Course import *
 
 class Scheduler:
     timetables = []
-    MAX_TIMETABLES = 10_000
+    MAX_TIMETABLES = 100_000
     SUB_MAX_TIMETABLES = MAX_TIMETABLES / 1000
     EARLIEST_TIME = 800
     LATEST_TIME = 2200
@@ -18,8 +18,8 @@ class Scheduler:
 
     def schedule(self, inputCourses: list[Course], term: int) -> None:
         """create all possible timetables from the given courses (in order)"""
-        def dfs(inputCourses: list[Course], timetable: Timetable) -> None:
-            if len(self.timetables) % self.SUB_MAX_TIMETABLES == 0:
+        def dfs(inputCourses: list[Course], timetable: Timetable, targetSize: int) -> None:
+            if len(self.timetables) == targetSize:
                 return
             if len(inputCourses) == 0:
                 # print(len(self.timeTables))
@@ -49,12 +49,13 @@ class Scheduler:
                                         isSuccessful = False
                                         break
                                 if isSuccessful:
-                                    dfs(inputCourses[1:], tempTimetable)
+                                    dfs(inputCourses[1:], tempTimetable, targetSize)
                         else:
-                            dfs(inputCourses[1:], newTimetable)
+                            dfs(inputCourses[1:], newTimetable, targetSize)
+        currTargetSize = self.SUB_MAX_TIMETABLES
         while len(self.timetables) != self.MAX_TIMETABLES:
-            dfs(inputCourses, Timetable([], 0))
-        print('aa')
+            dfs(inputCourses, Timetable([], 0), currTargetSize)
+            currTargetSize += self.SUB_MAX_TIMETABLES
         self.rankTimetables()
 
         
@@ -73,12 +74,12 @@ class Scheduler:
                 schedule[d].append(section.times[d])
         
         score = 0
-        maxScoreFromNumClass = 5
+        maxScoreFromNumClass = 8
         maxScoreFromSpacedClass = 8
         idealEndTime = 1600
         maxScoreFromLateTime = 5
         idealStartTime = 1000
-        maxScoreFromEarlyTime = 4 # 2 would be the latest
+        maxScoreFromEarlyTime = 6 # 2 would be the latest
         lunchBreak = (1100, 1300)
         scoreForLunchBreak = 5
         for d in schedule.keys():
@@ -86,15 +87,11 @@ class Scheduler:
                 score += maxScoreFromNumClass
                 continue
             # award less for more classes
-            # score += int(maxScoreFromNumClass/(len(schedule[d]) + 1))
+            score += int(maxScoreFromNumClass/(len(schedule[d]) + 1))
 
             schedule[d].sort(key=lambda t: t[0])
             earliestClass = schedule[d][0]
             latestClass = schedule[d][-1]
-            # if earliestClass[0] <= self.CUTOFF_TIME: # bonus for starting late
-            #     score += self.spaceBetweenTime(earliestClass[0], self.EARLIEST_TIME)
-            # else: # penalize for starting too late
-            #     score -= self.spaceBetweenTime(earliestClass[0], self.CUTOFF_TIME) * 5
             if earliestClass[0] >= idealStartTime:
                 score += min(self.spaceBetweenTime(earliestClass[0], idealStartTime),\
                     maxScoreFromEarlyTime)
@@ -104,7 +101,7 @@ class Scheduler:
             if latestClass[1] <= idealEndTime: # penalize for ending too late
                 score += min(self.spaceBetweenTime(latestClass[0], idealEndTime), maxScoreFromLateTime)
             else:
-                score -= self.spaceBetweenTime(latestClass[1], idealEndTime)
+                score -= self.spaceBetweenTime(latestClass[1], idealEndTime) * 2
             
             hasLunchBreak = True
             for i in range(len(schedule[d]) - 1): # bonus for spaced class
@@ -116,7 +113,7 @@ class Scheduler:
                     hasLunchBreak = False
             score += scoreForLunchBreak if hasLunchBreak else 0 
 
-        return score
+        return max(score,0)
 
 
     def spaceBetweenTime(self, slotOne: int, slotTwo: int) -> int:
