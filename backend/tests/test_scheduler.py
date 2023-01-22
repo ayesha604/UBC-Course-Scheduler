@@ -123,8 +123,7 @@ def getPHYS119Sections() -> list[Section]:
 if __name__ == "__main__":
     courseToScrape = ['CPSC 110', 'CPSC 121', 'PHYS 119', 'MATH 100']
     scraper = Scraper()
-    scraper.set_course_names(courseToScrape)
-    scraper.scrape_all_courses()
+    scraper.scrape_course_list(courseToScrape)
     # print(scraper.get_courses())
 
     # math100Sections = getMATH100Sections()

@@ -67,7 +67,7 @@ def scrape_course(course_name: str) -> Course:
     department, number = course_name.split(" ")
     url = COURSE_URL + department + COURSE_URL_ADD + number
     soup = make_soup(url)
-    print(url)
+    # print(url)
 
     sections = []
     # list of unique activities
@@ -91,54 +91,60 @@ def scrape_course(course_name: str) -> Course:
 
 
 class Scraper:
-    courses = {}  # name: Course
-    deps = []  # str
-    course_names = []
+    _courses = {}  # name: Course
+    _deps = []  # str
+    _course_names = []
 
     def __init__(self, do_scrape=False):
         if do_scrape:
             self.scrape_all()
 
     def scrape_all(self):
+        """TODO: Automatically scrape all courses from the SSC."""
         print('Scraping all department names...')
-        self.scrape_deps()
-        print(self.deps)
+        self._scrape_deps()
+        print(self._deps)
         num_done = 0
-        for dep in self.deps:
-            print(f'\rScraping all course names... {num_done} / {len(self.deps)}', end='')
-            self.scrape_course_names(dep)
+        for dep in self._deps:
+            print(f'\rScraping all course names... {num_done} / {len(self._deps)}', end='')
+            self.scrape_all_from_dep(dep)
             time.sleep(SLEEP_TIME)
             num_done += 1
         print()
 
-    def scrape_deps(self):
+    def scrape_course_list(self, course_names: list[str]):
+        """Scrape all course names in a list"""
+        for course_name in course_names:
+            self.scrape_course(course_name)
+
+    def scrape_course(self, course_name: str):
+        """Scrape one course name"""
+        if course_name not in self._course_names:
+            self._course_names.append(course_name)
+        self._courses[course_name] = scrape_course(course_name)
+
+    def scrape_all_from_dep(self, dep: str):
+        """Scrape all courses from a given department name"""
+        url = DEP_URL + dep
+        soup = make_soup(url)
+        for link in soup.find_all('a'):
+            if link.parent.name == 'td':
+                if link.text not in self._course_names:
+                    self.scrape_course(link.text)
+
+    def _scrape_deps(self):
         new_deps = []
         soup = make_soup(ALL_DEPS_URL)
         for link in soup.find_all('a'):
             if link.parent.name == 'td':
                 new_deps.append(link.text)
-        self.deps = new_deps
-
-    def scrape_course_names(self, dep: str):
-        url = DEP_URL + dep
-        soup = make_soup(url)
-        for link in soup.find_all('a'):
-            if link.parent.name == 'td':
-                if link.text not in self.course_names:
-                    self.course_names.append(link.text)
-
-    def scrape_all_courses(self):
-        for course_name in self.course_names:
-            self.courses[course_name] = scrape_course(course_name)
+        self._deps = new_deps
 
     def get_departments(self) -> list[str]:
-        return self.deps
+        return self._deps
 
     def get_courses(self) -> dict[str:Course]:
-        return self.courses
+        return self._courses
 
     def get_course_names(self) -> list[str]:
-        return self.course_names
-
-    def set_course_names(self, course_names: list[str]):
-        self.course_names = course_names.copy()
+        return self._course_names
