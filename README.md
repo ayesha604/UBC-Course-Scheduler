@@ -13,6 +13,13 @@ Our submission to nwHacks 2023! With most of the team members being new to hacka
     - Number of classes in a day: fewer classes in the day equals to less workload which equals to more points
     - Space between classes: the more spaced out the classes are the better the timetable is. But, classes should not be too far (~4 hours) apart.
   - Lastly, we would rank them based on the score and return the top 10 timetables.
-- Front End
+- Communication between front and back end
 
 ## Future features
+- Use walking distance as a criteria (e.g, Google Map API)
+- Use professor/course rating as a criteria (API/Web scrape ratemyprofessor.com)
+- More custommizable criteria (i.e., allow user-defined criteria)
+- Timetable score breakdown - explore how a timetable is scored
+- Better scoring/searching algorithm
+- Improve scraping for edge cases
+- Integration with UBC Course Matcher (by Jen Taruno) - create schedules with your friends.
