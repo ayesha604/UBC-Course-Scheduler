@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { sendCourses } from './util/api.js'
 import './App.scss'
 import Nav from './components/Nav'
 import Container from 'react-bootstrap/Container'
@@ -6,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function App() {
+  console.log(sendCourses(["CPSC 110"]))
 
   return (
     <div className="App">
