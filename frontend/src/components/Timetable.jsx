@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import './Timetable.scss'
@@ -61,59 +60,22 @@ function getDaysFilledWith(sections, times) {
     return daysWithTimes
 }
 
-export default function Timetable() {
-    const [criteriaScore, setCriteriaScore] = useState(9.8)
+export default function Timetable({ sections, criteriaScore, num }) {
     let criteriaScoreColor = criteriaScore > 6.6 ? "score-hi" : 
                             criteriaScore > 3.3 ? "score-med" : "score-low"
 
     let times = makeTimes()
-
-    let sections = [
-        {
-            "name": "CPSC 110 103",
-            "days": [
-                {
-                    "day": "Mon",
-                    "times": ["9:30", "11:00"]
-                },
-                {
-                    "day": "Wed",
-                    "times": ["9:30", "11:00"]
-                },
-                {
-                    "day": "Fri",
-                    "times": ["9:30", "11:00"]
-                }
-            ],
-            "location": "West Mall Swing Space",
-            "professors": "OLA, OLUWAKEMI",
-            "states": ""
-        },
-        {
-            "name": "CHIN 141 T03",
-            "days": [
-                {
-                    "day": "Wed",
-                    "times": ["15:00", "16:00"]
-                }
-            ],
-            "location": "Buchanan",
-            "professors": "LEE, LI-JUNG; WANG, HSIANG-NING",
-            "status": ""
-        }
-    ]
-    
     let daysFilledWith = getDaysFilledWith(sections, times)
+
     return (
-        <div>
-            <button className="btn-round">Left</button>
-            <h1>Timetable 1</h1>
-            <p>Criteria score: <span className={criteriaScoreColor}>{criteriaScore}</span></p>
-            <Container>
+        <div className="container">
+            <div>
+                <h1>Timetable {num + 1}</h1>
+                <p>Criteria score: <span className={criteriaScoreColor}>{criteriaScore}</span></p>
                 <table>
                     <thead>
                         <tr>
-                            <th class="times"></th>
+                            <th className="times"></th>
                             {weekdays.map((e) => <th>{e}</th>)}
                         </tr>
                     </thead>
@@ -126,7 +88,7 @@ export default function Timetable() {
                                 {i % 2 == 1 &&
                                     <td className="time"></td>
                                 }
-                                {daysFilledWith.map((day) => {
+                                {daysFilledWith.map((day, j) => {
                                     if(day[i].index === -1) {
                                         return (<td></td>)
                                     } else if(day[i].index === -2) {
@@ -136,8 +98,9 @@ export default function Timetable() {
                                             <OverlayTrigger trigger="click" placement="right" overlay={
                                                 <Popover body>
                                                     <h3 className="popover-heading">{sections[day[i].index]["name"]}</h3>
-                                                    <p className="popover-line"><span className="semibold">Days:</span> {sections[day[i].index]["days"].map((day) => day.day).join(", ")}</p>
                                                     <p className="popover-line"><span className="semibold">Location:</span> {sections[day[i].index]["location"]}</p>
+                                                    <p className="popover-line"><span className="semibold">Time:</span> {sections[day[i].index]["days"].find((e) => e.day === weekdaysAbbrv[j]).times.join("-")}</p>
+                                                    <p className="popover-line"><span className="semibold">Days:</span> {sections[day[i].index]["days"].map((e) => e.day).join(", ")}</p>
                                                 </Popover>}>
                                                 <td className="section-slot" rowSpan={day[i].rowSpan} style={{ backgroundColor: "#274082"}}>
                                                     <p className="slot-title">{sections[day[i].index]["name"]}</p>
@@ -152,8 +115,7 @@ export default function Timetable() {
                         )})}
                     </tbody>
                 </table>
-                
-            </Container>
+            </div>
         </div>
     )
 }
