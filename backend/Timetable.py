@@ -1,4 +1,5 @@
 from Section import *
+from NewSection import *
 
 class Timetable:
     sections = []
