@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { sendCourses } from './util/api.js'
 import './App.scss'
 import Nav from './components/Nav'

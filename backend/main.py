@@ -28,7 +28,7 @@ def main():
     @cross_origin()
     def schedule():
         data = request.get_json()['courses']
-        course_names = data['courses']
+        course_names = data
         courses = loader.get_courses_from_names(course_names)
         scheduler = Scheduler()
         # TODO: pass in term
