@@ -5,12 +5,14 @@ from backend.objects.Section import *
 from backend.objects.Course import *
 
 class Scheduler:
-    timetables = []
     MAX_TIMETABLES = 5000
     SUB_MAX_TIMETABLES = MAX_TIMETABLES / 100
     EARLIEST_TIME = 800
     LATEST_TIME = 2200
     CUTOFF_TIME = (LATEST_TIME - EARLIEST_TIME) / 2 + EARLIEST_TIME
+
+    def __init__(self):
+        self.timetables = []
 
     def schedule(self, inputCourses: list[Course], term: int) -> None:
         """create all possible timetables from the given courses (in order)"""
@@ -52,6 +54,7 @@ class Scheduler:
                         else:
                             dfs(inputCourses[1:], newTimetable, targetSize)
         currTargetSize = self.SUB_MAX_TIMETABLES
+
         while currTargetSize != self.MAX_TIMETABLES:
             dfs(inputCourses, Timetable([], 0), currTargetSize)
             currTargetSize += self.SUB_MAX_TIMETABLES
