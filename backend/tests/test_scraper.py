@@ -1,4 +1,4 @@
-from objects.Scraper import Scraper
+from backend.objects.Scraper import Scraper
 
 TO_SCRAPE = ['CPSC 110', 'CPSC 121', 'MATH 100']
 
@@ -9,10 +9,9 @@ def main():
     # for dep in TO_SCRAPE:
     #     s.scrape_course_names(dep)
     # print(s.get_course_names())
-    s.set_course_names(TO_SCRAPE)
-    s.scrape_all_courses()
-    print(s.courses['CPSC 121'])
-    print(*s.courses['MATH 100'].getSections(), sep='\n')
+    s.scrape_course_list(TO_SCRAPE)
+    print(s._courses['CPSC 121'])
+    print(*s._courses['MATH 100'].getSections(), sep='\n')
     # print(s.get_courses())
 
 

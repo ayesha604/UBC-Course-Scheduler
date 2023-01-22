@@ -1,3 +1,5 @@
+import dataclasses
+import json
 from dataclasses import dataclass
 from typing import TypeVar
 
@@ -16,3 +18,6 @@ class Section:
     location: str = None
     professor: str = None
     dependencies: list[T] = None
+
+    def to_json(self) -> str:
+        return json.dumps(dataclasses.asdict(self))
