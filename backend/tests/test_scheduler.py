@@ -145,8 +145,9 @@ if __name__ == "__main__":
     timetables = scheduler.getTimetables()
 
     # print(len(timetables))
-    for timetable in timetables[0:100]:
+    for timetable in timetables[0:3]:
         sections = timetable.getSections()
+        print(f"Timetable with score {timetable.getScore()}")
         for section in sections:
             print(f"{section.name} : {section.times}")
         print()
