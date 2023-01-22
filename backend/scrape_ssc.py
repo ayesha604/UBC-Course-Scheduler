@@ -2,7 +2,7 @@ import json
 
 from backend.objects.Scraper import Scraper
 
-COURSES_TO_SCRAPE = ['CPSC 110', 'MATH 100', 'PHYS 117', 'CPSC 121', 'MATH 101']
+COURSES_TO_SCRAPE = ['CPSC 110', 'MATH 100', 'PHYS 117', 'CPSC 121', 'MATH 101', 'COGS 200', 'CPSC 210']
 PATH = './backend/saved_json/saved_courses.json'
 
 

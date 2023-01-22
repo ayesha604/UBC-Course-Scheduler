@@ -51,13 +51,15 @@ class CoursesLoader:
 
     def get_course_names_term(self, term: int) -> list[str]:
         """Return all loaded course names for given term"""
-        allCourses = list(self.courses.values()) # listof Course object
-        courseNamesInTerm = []
+        all_courses = []
+        for name in self.courses.keys():
+            all_courses.append(course_from_dict(self.courses[name]))
 
-        for course in allCourses:
+        courseNamesInTerm = []
+        for course in all_courses:
             for s in course.getSections():
                 if s.term == term:
-                    courseNamesInTerm.append(course.getName())
+                    courseNamesInTerm.append(course.getCourseName())
                     break
 
         return courseNamesInTerm

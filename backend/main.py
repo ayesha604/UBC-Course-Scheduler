@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from backend.objects.CoursesLoader import CoursesLoader
 from backend.objects.Scheduler import Scheduler
-import logging
 
 SAVED_COURSES_PATH = './backend/saved_json/saved_courses.json'
 NUM_TABLES = 20
@@ -20,10 +19,10 @@ def main():
     @app.route('/valid_courses', methods=['GET'])
     @cross_origin()
     def valid_courses():
-        # TODO: separate by term
-        course_names = loader.get_course_names()
-        response = {"Term 1": course_names,
-                    "Term 2": course_names}
+        course_names1 = loader.get_course_names_term(1)
+        course_names2 = loader.get_course_names_term(1)
+        response = {"Term 1": course_names1,
+                    "Term 2": course_names2}
         return jsonify(response)
 
     @app.route('/schedule', methods=['POST', 'OPTIONS'])
