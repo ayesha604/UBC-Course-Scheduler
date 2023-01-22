@@ -144,6 +144,11 @@ class Scraper:
                 if link.text not in self._course_names:
                     self.scrape_course(link.text)
 
+    def scrape_all_from_deps(self, deps: list[str]):
+        """Scrape all courses in a list of department names"""
+        for dep in deps:
+            self.scrape_all_from_dep(dep)
+
     def _scrape_deps(self):
         new_deps = []
         soup = make_soup(ALL_DEPS_URL)
