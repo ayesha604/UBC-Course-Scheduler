@@ -24,7 +24,8 @@ def make_soup(url: str) -> BeautifulSoup:
 
 
 def is_lecture(tag: bs4.Tag):
-    return tag.has_attr('class') and tag['class'] == ['section1'] and "Lecture" in tag.text
+    return tag.has_attr('class') and tag['class'] == ['section1'] \
+        and "Lecture" in tag.text and "STT" not in tag.text
 
 
 def is_section(tag: bs4.Tag) -> bool:
