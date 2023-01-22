@@ -22,7 +22,8 @@ def main():
 
     @app.route('/schedule', methods=['POST'])
     def schedule():
-        course_names = request.get_json()['courses']
+        data = request.get_json()['courses']
+        course_names = data['courses']
         courses = loader.get_courses_from_names(course_names)
         scheduler = Scheduler()
         # TODO: pass in term
