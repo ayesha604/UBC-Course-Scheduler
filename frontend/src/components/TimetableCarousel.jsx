@@ -6,6 +6,7 @@ import './TimeTableCarousel.scss'
 
 export default function TimetableCarousel() {
     const [currentTimetable, setCurrentTimetable] = useState(0)
+    const [animDirection, setAnimDirection] = useState("anim-left")
 
     let timetables = [
         {
@@ -87,11 +88,13 @@ export default function TimetableCarousel() {
     function handleNextTimetable() {
         if(currentTimetable !== timetables.length - 1) {
             setCurrentTimetable(currentTimetable + 1)
+            setAnimDirection("anim-right")
         }
     }
     function handlePrevTimetable() {
         if(currentTimetable !== 0) {
             setCurrentTimetable(currentTimetable - 1)
+            setAnimDirection("anim-left")
         }
     }
 
@@ -101,7 +104,7 @@ export default function TimetableCarousel() {
                 <button onClick={handlePrevTimetable} className="btn-round left" disabled={currentTimetable === 0}>
                     <IoTriangleSharp />
                 </button>
-                <div >
+                <div className={animDirection} key={currentTimetable}>
                     <Timetable sections={timetables[currentTimetable].sections}
                                 criteriaScore={timetables[currentTimetable].criteriaScore}
                                 num={currentTimetable} />

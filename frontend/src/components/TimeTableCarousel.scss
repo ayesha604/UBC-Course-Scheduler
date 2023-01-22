@@ -1,3 +1,35 @@
+@keyframes left-to-right {
+    0% {
+        transform: translateX(-200px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: none;
+        opacity: 100%;
+    }
+}
+@keyframes right-to-left {
+    0% {
+        transform: translateX(200px);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: none;
+        opacity: 100%;
+    }
+}
+
+.anim-right {
+    animation: right-to-left 0.6s;
+    animation-timing-function: ease-out;
+}
+.anim-left {
+    animation: left-to-right 0.6s;
+    animation-timing-function: ease-out;
+}
+
 .btn-round {
     display: flex;
     background-color: #274082;

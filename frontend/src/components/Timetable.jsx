@@ -77,12 +77,12 @@ export default function Timetable({ sections, criteriaScore, num, sectionColor }
                     <thead>
                         <tr>
                             <th className="times"></th>
-                            {weekdays.map((e) => <th>{e}</th>)}
+                            {weekdays.map((e, i) => <th key={i}>{e}</th>)}
                         </tr>
                     </thead>
                     <tbody>
                         {times.map((time, i) => { return (
-                            <tr>
+                            <tr key={i}>
                                 {i % 2 == 0 && 
                                     <td className="time-text">{time}</td>
                                 }
@@ -91,12 +91,12 @@ export default function Timetable({ sections, criteriaScore, num, sectionColor }
                                 }
                                 {daysFilledWith.map((day, j) => {
                                     if(day[i].index === -1) {
-                                        return (<td></td>)
+                                        return (<td key={j}></td>)
                                     } else if(day[i].index === -2) {
                                         return(<></>)
                                     } else {
                                         return (
-                                            <OverlayTrigger trigger="click" placement="right" overlay={
+                                            <OverlayTrigger key={j} trigger="click" placement="right" overlay={
                                                 <Popover body>
                                                     <h3 className="popover-heading">{sections[day[i].index]["name"]}</h3>
                                                     <p className="popover-line"><span className="semibold">Location:</span> {sections[day[i].index]["location"]}</p>
@@ -111,7 +111,6 @@ export default function Timetable({ sections, criteriaScore, num, sectionColor }
                                         )
                                     }
                                 })}
-                                
                             </tr>
                         )})}
                     </tbody>
