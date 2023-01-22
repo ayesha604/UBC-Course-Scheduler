@@ -1,14 +1,19 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import './Nav.scss'
 
 export default function Nav() {
 
     return (
-        <div>
-            <Button variant="primary">Primary</Button>
-            <Button variant="success">Green</Button>
-            <Button variant="danger">Red</Button>
-            <h1>Text</h1>
-        </div>
+        <Navbar bg="light">
+            <Container>
+                <Navbar.Brand as="div">
+                    <h1 class="logo">
+                        UBC Course Matcher
+                    </h1>
+                </Navbar.Brand>
+            </Container>
+        </Navbar>
     )
 }
