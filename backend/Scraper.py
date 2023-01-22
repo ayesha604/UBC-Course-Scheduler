@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import time
 
 from backend.Course import Course
 
@@ -10,6 +11,7 @@ HEADERS = {
 }
 ALL_DEPS_URL = "https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-all-departments"
 DEP_URL = "https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-department&dept="
+SLEEP_TIME = 0.5
 
 
 def make_soup(url: str) -> BeautifulSoup:
@@ -26,7 +28,16 @@ class Scraper:
             self.scrape_all()
 
     def scrape_all(self):
-        ...
+        print('Scraping all department names...')
+        self.scrape_deps()
+        print(self.deps)
+        num_done = 0
+        for dep in self.deps:
+            print(f'\rScraping all departments... {num_done} / {len(self.deps)}', end='')
+            self.scrape_course_names(dep)
+            time.sleep(SLEEP_TIME)
+            num_done += 1
+        print()
 
     def scrape_deps(self):
         new_deps = []
