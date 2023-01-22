@@ -1,3 +1,4 @@
 {
-    "courses" : ["Courses Names"]
+    "courses" : ["Courses Names"],
+    "term": 1
 }

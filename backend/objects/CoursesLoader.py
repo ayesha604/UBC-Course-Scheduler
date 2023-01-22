@@ -49,6 +49,10 @@ class CoursesLoader:
         """Return all loaded course names"""
         return list(self.courses.keys())
 
+    def get_course_names_term(self, term: int) -> list[str]:
+        """Return all loaded course names for given term"""
+        ...
+
     def get_courses_from_names(self, names: list[str]) -> list[Course]:
         """Get a list of Course objects from names"""
         courses = []
