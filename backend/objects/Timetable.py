@@ -1,5 +1,5 @@
-from Section import *
-from NewSection import *
+from objects.Section import *
+from objects.NewSection import *
 
 class Timetable:
     sections = []

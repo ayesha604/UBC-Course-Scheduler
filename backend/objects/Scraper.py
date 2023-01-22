@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-from backend.NewSection import Section
-from backend.Course import Course
+from objects.NewSection import Section
+from objects.Course import Course
 
 # sorry ubc
 HEADERS = {

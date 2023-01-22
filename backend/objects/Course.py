@@ -1,15 +1,17 @@
-from Section import *
+from objects.Section import *
 
 class Course:
     courseName = ""
     sections = [] # [Section]
     creditsNum = 0
+    requirements = []
 
-    def __init__(self, courseName: str, sections: list[Section], creditsNum: int) -> None:
+    def __init__(self, courseName: str, sections: list[Section], requirements: list[str],creditsNum: int) -> None:
         """Create a course object"""
         self.courseName = courseName
         self.sections = sections
         self.creditsNum = creditsNum
+        self.requirements = requirements
         return
 
     def __str__(self):
