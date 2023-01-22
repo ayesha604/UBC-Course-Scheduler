@@ -124,7 +124,7 @@ def getPHYS119Sections() -> list[Section]:
         sectionL2A, sectionL2B, sectionL2C, sectionL2D, sectionL2E, sectionL2F, sectionL2G]
 
 if __name__ == "__main__":
-    courseToScrape = ['CPSC 110','PHYS 117', 'CPSC 110', 'MATH 100']
+    courseToScrape = ['CPSC 110','PHYS 117', 'CPSC 121', 'MATH 100']
     scraper = Scraper()
     scraper.scrape_course_list(courseToScrape)
     # print(scraper.get_courses())
@@ -145,8 +145,19 @@ if __name__ == "__main__":
     timetables = scheduler.getTimetables()
 
     # print(len(timetables))
-    for timetable in timetables[0:100]:
+    print("#### Top 3 Timetable ###")
+    for timetable in timetables[0:3]:
         sections = timetable.getSections()
+        print(f"Timetable with score {timetable.getScore()}")
         for section in sections:
             print(f"{section.name} : {section.times}")
         print()
+    print("#### Worst 3 Timetable ###")
+    for i in range(len(timetables) - 3, len(timetables)):
+        timetable = timetables[i]
+        sections = timetable.getSections()
+        print(f"Timetable with score {timetable.getScore()}")
+        for section in sections:
+            print(f"{section.name} : {section.times}")
+        print()
+        
