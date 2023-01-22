@@ -13,6 +13,10 @@ class Timetable:
     def setScore(self, newScore: int) -> None:
         self.score = newScore
 
+    def addSection(self, section: Section) -> None:
+        self.sections.append(Section)
+        return
+
     def getScore(self) -> int:
         """return the score for the timetable"""
         return self.score
