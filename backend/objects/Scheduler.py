@@ -58,8 +58,6 @@ class Scheduler:
             currTargetSize += self.SUB_MAX_TIMETABLES
         self.rankTimetables()
 
-        
-
     def calculateScore(self, timetable: Timetable) -> int:
         """Calculate the score for a timetable based on:
             + number of classes in a day
@@ -115,13 +113,11 @@ class Scheduler:
 
         return max(score,0)
 
-
     def spaceBetweenTime(self, slotOne: int, slotTwo: int) -> int:
         """Return space between two time in units of 30 minutes"""
         difference = slotOne - slotTwo
         extra = 1 if difference % 100 != 0 else 0
         return int(difference/100) + extra
-
 
     def rankTimetables(self) -> None:
         """rank the timeTables based on score (in place)"""
