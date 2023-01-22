@@ -129,10 +129,11 @@ if __name__ == "__main__":
 
     coursesToSchedule = [math100, phys117, phys119]
     scheduler = Scheduler()
-    scheduler.schedule(coursesToSchedule)
+    scheduler.schedule(coursesToSchedule, 1)
     timetables = scheduler.getTimetables()
 
     for timetable in timetables:
         sections = timetable.getSections()
         for section in sections:
             print(f"{section.getSectionName()} : {section.getTime()}")
+        print()

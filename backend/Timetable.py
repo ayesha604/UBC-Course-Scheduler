@@ -22,10 +22,10 @@ class Timetable:
                 newTime = newSectionTime.get(day)
                 currTime = currSectionTime.get(day)
                 if newTime is not None and \
-                    not ((newTime[1] < currTime[0]) or (newTime[0] > currTime[1])):
+                    not ((newTime[1] <= currTime[0]) or (newTime[0] >= currTime[1])):
                     return False
 
-        self.sections.append(Section)
+        self.sections.append(newSection)
         return True
 
     def getScore(self) -> int:

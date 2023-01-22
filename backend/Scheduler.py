@@ -9,9 +9,23 @@ class Scheduler:
         """create a scheduler"""
         return
 
-    def schedule(self, inputCourses: list[Course]) -> None:
+    def schedule(self, inputCourses: list[Course], term: int) -> None:
         """create all possible timetables from the given courses (in order)"""
-        pass
+        def dfs(inputCourses: list[Course], timetable: Timetable) -> None:
+            if len(inputCourses) == 0:
+                self.timetables.append(timetable)
+            else:
+                currCourse = inputCourses[0]
+                allSections = currCourse.getSections()
+                for section in allSections:
+                    newTimetable = Timetable(timetable.getSections())
+                    if newTimetable.addSection(section):
+                        dfs(inputCourses[1:], newTimetable)
+                
+        
+        dfs(inputCourses, Timetable([], 0))
+
+        
 
     def calculateScore(self, timeTable: Timetable) -> int:
         pass
