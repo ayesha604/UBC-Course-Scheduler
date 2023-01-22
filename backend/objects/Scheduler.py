@@ -23,10 +23,11 @@ class Scheduler:
                     
                     if newTimetable.addSection(section):
                         dependencies = []
-                        for r in section.getRequirements():
-                            dependencies.append(list(filter(lambda d: d.getSectionType() == r, section.getDependencies())))
-                        
+                        for r in currCourse.getRequirements():
+                            dependencies.append(list(filter(lambda d: d.activity == r, section.dependencies)))
+                         
                         allCombinations = list(itertools.product(*dependencies))
+
                         if len(allCombinations) != 0:
                             for comb in allCombinations:
                                 tempTimetable = Timetable(newTimetable.getSections())
