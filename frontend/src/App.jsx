@@ -3,6 +3,7 @@ import { sendCourses } from './util/api.js'
 import './App.scss'
 import Sidebar from './components/sidebar'
 import Container from 'react-bootstrap/Container'
+import Nav from './components/Nav'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TimetableCarousel from './components/TimetableCarousel'
@@ -91,9 +92,9 @@ function App() {
   //   }
   // ]
 
-  async function handleGetTimetables() {
+  async function handleGetTimetables(courses, term) {
     setLoading(true)
-    setTimetables((await sendCourses(["CPSC 110", "PHYS 117"], 1)).timetables)
+    setTimetables((await sendCourses(courses, term)).timetables)
     setLoading(false)
   }
 
@@ -118,7 +119,7 @@ function App() {
         <Row>
           <Col className="sidebar">
             <Container>
-              <Sidebar />
+              <Sidebar onSubmit={handleGetTimetables} />
             </Container>
           </Col>
           <Col md={9}>
