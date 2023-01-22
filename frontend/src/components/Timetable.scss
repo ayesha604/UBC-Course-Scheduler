@@ -139,3 +139,17 @@ td.section-slot p.slot-subtitle {
 .popover-body .popover-line {
     margin-bottom: 0;
 }
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #DFDFDF;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+.skeleton thead tr th,
+.skeleton tbody tr td {
+    animation: skeleton-loading 1s linear infinite alternate;
+}

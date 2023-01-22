@@ -6,9 +6,11 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TimetableCarousel from './components/TimetableCarousel'
+import TimetablePlaceholder from './components/TimetablePlaceholder.jsx'
 
 function App() {
   console.log(sendCourses(["CPSC 110"]))
+  const [loading, setLoading] = useState(false)
 
   let timetables = [
     {
@@ -99,8 +101,14 @@ function App() {
             </Container>
           </Col>
           <Col md={9}>
-            {timetables && 
+            {timetables && !loading &&
               <TimetableCarousel timetables={timetables} />
+            }
+            {timetables && loading &&
+              <TimetablePlaceholder />
+            }
+            {!timetables &&
+              <p class="inactive">Please enter your desired courses on the left.</p>
             }
           </Col>
         </Row>
