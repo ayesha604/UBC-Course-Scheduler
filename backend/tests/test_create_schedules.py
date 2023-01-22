@@ -6,7 +6,7 @@ from backend.objects.Scraper import Scraper
 
 SAVED_COURSES_PATH = 'backend/saved_json/saved_courses.json'
 SAVED_TIMETABLES_PATH = 'backend/saved_json/saved_timetables.json'
-TO_LOAD = ['CPSC 110', 'MATH 100', ]
+TO_LOAD = ['CPSC 110', 'MATH 100']
 NUM_TABLES = 10
 
 
