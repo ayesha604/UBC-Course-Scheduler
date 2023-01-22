@@ -33,6 +33,13 @@ class Timetable:
         """return the score for the timetable"""
         return self.score
 
+    def getSectionNames(self) -> list[str]:
+        """return the section names in the time tables"""
+        sectionNames = []
+        for section in self.sections:
+            sectionNames.append(section.name)
+        return sectionNames
+
     def getSections(self) -> list[Section]:
         """return a list of all sections in the timetable"""
         return self.sections.copy()
