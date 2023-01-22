@@ -92,10 +92,9 @@ function App() {
 
   async function handleGetTimetables() {
     setLoading(true)
-    setTimetables((await sendCourses(["CPSC 110", "PHYS 117"])).timetables)
+    setTimetables((await sendCourses(["CPSC 110", "PHYS 117"], 1)).timetables)
     setLoading(false)
   }
-  console.log(timetables)
 
   useEffect(() => {
     async function prefetch() {
@@ -123,10 +122,10 @@ function App() {
             </Container>
           </Col>
           <Col md={9}>
-            {timetables && !loading &&
+            {timetables && timetables.length > 0 && !loading &&
               <TimetableCarousel timetables={timetables} />
             }
-            {timetables && loading &&
+            {loading &&
               <TimetablePlaceholder />
             }
             {!timetables &&

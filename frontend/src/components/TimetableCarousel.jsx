@@ -5,6 +5,7 @@ import { IoTriangleSharp } from 'react-icons/io5'
 import './TimeTableCarousel.scss'
 
 export default function TimetableCarousel({ timetables }) {
+    console.log(timetables)
     const [currentTimetable, setCurrentTimetable] = useState(0)
     const [animDirection, setAnimDirection] = useState("anim-left")
 

@@ -1,4 +1,4 @@
-export async function sendCourses(courses) {
+export async function sendCourses(courses, term) {
     let response = await fetch('http://localhost:5000/schedule', {
         method: 'POST',
         headers: {
@@ -6,7 +6,7 @@ export async function sendCourses(courses) {
         },
         body: JSON.stringify({
             "courses": courses,
-            "term": 2
+            "term": term
         })
     })
     return (await response.json())

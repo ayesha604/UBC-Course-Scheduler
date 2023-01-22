@@ -35,6 +35,7 @@ def main():
         courses = loader.get_courses_from_names(course_names)
         scheduler = Scheduler()
         scheduler.schedule(courses, term)
+
         return jsonify(scheduler.to_dict(NUM_TABLES))
 
     app.run(debug=True, port=5000)
