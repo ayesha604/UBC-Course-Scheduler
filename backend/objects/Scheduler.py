@@ -54,6 +54,11 @@ class Scheduler:
         
 
     def calculateScore(self, timetable: Timetable) -> int:
+        """Calculate the score for a timetable based on:
+            + number of classes in a day
+            + start-time and end-time
+            + space in between classes
+            + lunch-break"""
         allSections = timetable.getSections()
         schedule = {"Mon": [], "Tue": [],\
             "Wed": [], "Thu": [], "Fri": []}
@@ -65,6 +70,8 @@ class Scheduler:
         maxScoreFromNumClass = 50
         maxScoreFromSpacedClass = 8
         maxScoreFromLateTime = self.spaceBetweenTime(self.LATEST_TIME, self.CUTOFF_TIME)
+        lunchBreak = (1100, 1300)
+        scoreForLunchBreak = 5
         for d in schedule.keys():
             if len(schedule[d]) == 0: # prep-day
                 score += maxScoreFromNumClass
@@ -83,11 +90,15 @@ class Scheduler:
             score += max(self.spaceBetweenTime(self.LATEST_TIME, latestClass[1]),\
                 maxScoreFromSpacedClass) # bonus for ending early
             
+            hasLunchBreak = True
             for i in range(len(schedule[d]) - 1): # bonus for spaced class
                 currClass = schedule[d][i]
                 nextClass = schedule[d][i + 1]
                 score += max(self.spaceBetweenTime(nextClass[0], currClass[1]),\
                     maxScoreFromSpacedClass)
+                if currClass[0] >= lunchBreak[0] and currClass[1] <= lunchBreak[1]:
+                    hasLunchBreak = False
+            score += scoreForLunchBreak if hasLunchBreak else 0 
 
         return score
 
