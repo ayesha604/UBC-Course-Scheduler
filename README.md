@@ -14,6 +14,7 @@ Our submission to nwHacks 2023! With most of the team members being new to hacka
     - Space between classes: the more spaced out the classes are the better the timetable is. But, classes should not be too far (~4 hours) apart.
   - Lastly, we would rank them based on the score and return the top 10 timetables.
 - Communication between front and back end
+  - To communicate between the frontend and backend, we expose API endpoints on our Flask server
 
 ## Future features
 - Use walking distance as a criteria (e.g, Google Map API)

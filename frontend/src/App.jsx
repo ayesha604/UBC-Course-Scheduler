@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { sendCourses } from './util/api.js'
 import './App.scss'
-import Sidebar from './components/sidebar'
+import Sidebar from './components/Sidebar'
 import Container from 'react-bootstrap/Container'
 import Nav from './components/Nav'
 import Row from 'react-bootstrap/Row';
@@ -98,11 +98,12 @@ function App() {
     setLoading(false)
   }
 
+  const [courseData, setCourseData] = useState()
   useEffect(() => {
     async function prefetch() {
       try {
         let response = (await fetch(prefetchCourseURL))
-        //console.log(await response.json())
+        setCourseData(await response.json())
       } catch(e) {
         console.error("Network request failed")
       }
@@ -119,7 +120,7 @@ function App() {
         <Row>
           <Col className="sidebar">
             <Container>
-              <Sidebar onSubmit={handleGetTimetables} />
+              <Sidebar handleSubmit={handleGetTimetables} courseData={courseData} />
             </Container>
           </Col>
           <Col md={9}>
@@ -129,7 +130,7 @@ function App() {
             {loading &&
               <TimetablePlaceholder />
             }
-            {!timetables &&
+            {!timetables && !loading &&
               <p class="inactive">Please enter your desired courses on the left.</p>
             }
           </Col>

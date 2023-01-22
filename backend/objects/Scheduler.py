@@ -12,10 +12,6 @@ class Scheduler:
     LATEST_TIME = 2200
     CUTOFF_TIME = (LATEST_TIME - EARLIEST_TIME) / 2 + EARLIEST_TIME
 
-    def __init__(self) -> None:
-        """create a scheduler"""
-        return
-
     def schedule(self, inputCourses: list[Course], term: int) -> None:
         """create all possible timetables from the given courses (in order)"""
         memo = []
@@ -125,14 +121,16 @@ class Scheduler:
     def rankTimetables(self) -> None:
         """rank the timeTables based on score (in place)"""
         self.timetables.sort(key=lambda t: t.getScore(), reverse=True)
+        
 
     def getTimetables(self) -> list[Timetable]:
         """return the possible timetables (in order)"""
         return self.timetables.copy()
 
     def getTopTimetables(self, top=3) -> list[Timetable]:
-        if top >= len(self.timetables):
+        if top >= len(self.timetables): 
             return self.timetables.copy()
+        
         return self.timetables[0:top]
 
     def getWorstTimetables(self, worst=3) -> list[Timetable]:

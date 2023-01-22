@@ -35,6 +35,12 @@ def main():
         courses = loader.get_courses_from_names(course_names)
         scheduler = Scheduler()
         scheduler.schedule(courses, term)
+        # for timetable in scheduler.getTopTimetables(1):
+        #     sections = timetable.getSections()
+        #     print(f"Timetable with score {timetable.getScore()}")
+        #     for section in sections:
+        #         print(f"{section.name} : {section.times}")
+        #     print()
 
         return jsonify(scheduler.to_dict(NUM_TABLES))
 
