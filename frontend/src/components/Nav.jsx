@@ -10,7 +10,7 @@ export default function Nav() {
             <Container>
                 <Navbar.Brand as="div">
                     <h1 class="logo">
-                        UBC Course Matcher
+                        UBC Course Scheduler
                     </h1>
                 </Navbar.Brand>
             </Container>
