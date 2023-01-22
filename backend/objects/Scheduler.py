@@ -117,3 +117,13 @@ class Scheduler:
     def getTimetables(self) -> list[Timetable]:
         """return the possible timetables (in order)"""
         return self.timetables.copy()
+    
+    def getTopTimetables(self, top=3) -> list[Timetable]:
+        if top >= len(self.timetables):
+            return self.timetables.copy()
+        return self.timetables[0:top]
+    
+    def getWorstTimetables(self, worst=3) -> list[Timetable]:
+        if worst >= len(self.timetables):
+            return self.timetables.copy()
+        return self.timetables[-worst:]

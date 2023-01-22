@@ -145,15 +145,14 @@ if __name__ == "__main__":
 
     # print(len(timetables))
     print("#### Top 3 Timetable ###")
-    for timetable in timetables[0:3]:
+    for timetable in scheduler.getTopTimetables():
         sections = timetable.getSections()
         print(f"Timetable with score {timetable.getScore()}")
         for section in sections:
             print(f"{section.name} : {section.times}")
         print()
     print("#### Worst 3 Timetable ###")
-    for i in range(len(timetables) - 3, len(timetables)):
-        timetable = timetables[i]
+    for timetable in scheduler.getWorstTimetables():
         sections = timetable.getSections()
         print(f"Timetable with score {timetable.getScore()}")
         for section in sections:
