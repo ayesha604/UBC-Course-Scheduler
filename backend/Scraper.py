@@ -65,6 +65,8 @@ def scrape_course(course_name: str) -> Course:
     print(url)
 
     sections = []
+    # list of unique activities
+    requirements = []
 
     lecture_tags = soup.find_all(is_lecture)
     for lecture_tag in lecture_tags:
@@ -72,12 +74,15 @@ def scrape_course(course_name: str) -> Course:
         dependencies = []
         next_tag = lecture_tag.next_sibling
         while type(next_tag) == bs4.Tag and next_tag.has_attr('class') and next_tag['class'] == ['section2']:
-            dependencies.append(make_section(next_tag))
+            new_dep = make_section(next_tag)
+            if new_dep.activity not in requirements:
+                requirements.append(new_dep.activity)
+            dependencies.append(new_dep)
             next_tag = next_tag.next_sibling
         lecture_section.dependencies = dependencies
         sections.append(lecture_section)
 
-    return Course(course_name, sections, None)
+    return Course(course_name, sections, requirements, None)
 
 
 class Scraper:

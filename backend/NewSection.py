@@ -16,6 +16,3 @@ class Section:
     location: str = None
     professor: str = None
     dependencies: list[T] = None
-
-
-

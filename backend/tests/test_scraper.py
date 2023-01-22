@@ -11,6 +11,7 @@ def main():
     # print(s.get_course_names())
     s.set_course_names(TO_SCRAPE)
     s.scrape_all_courses()
+    print(s.courses['CPSC 121'])
     print(*s.courses['MATH 100'].getSections(), sep='\n')
     # print(s.get_courses())
 
