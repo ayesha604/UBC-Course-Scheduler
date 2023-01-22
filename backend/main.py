@@ -4,7 +4,7 @@ from backend.objects.CoursesLoader import CoursesLoader
 from backend.objects.Scheduler import Scheduler
 
 SAVED_COURSES_PATH = './backend/saved_json/saved_courses.json'
-
+NUM_TABLES = 10
 
 def main():
     app = Flask(__name__)
@@ -27,13 +27,13 @@ def main():
     @app.route('/schedule', methods=['POST'])
     @cross_origin()
     def schedule():
-        data = request.get_json()['courses']
+        data = request.get_json()
         course_names = data['courses']
         courses = loader.get_courses_from_names(course_names)
         scheduler = Scheduler()
         # TODO: pass in term
         scheduler.schedule(courses, 1)
-        ...
+        return jsonify(scheduler.to_dict(10))
 
     app.run(debug=True, port=5000)
 

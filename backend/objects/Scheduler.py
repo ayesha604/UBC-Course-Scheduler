@@ -144,7 +144,7 @@ class Scheduler:
             return self.timetables.copy()
         return self.timetables[-worst:]
 
-    def to_dict(self) -> dict:
+    def to_dict(self, num_tables: int) -> dict:
         """Return a dict formatted in the same way as timetable.json"""
-        timetables_list = [t.to_dict() for t in self.getTimetables()]
+        timetables_list = [t.to_dict() for t in self.getTopTimetables(num_tables)]
         return {"timetables": timetables_list}

@@ -6,7 +6,8 @@ from backend.objects.Scraper import Scraper
 
 SAVED_COURSES_PATH = 'backend/saved_json/saved_courses.json'
 SAVED_TIMETABLES_PATH = 'backend/saved_json/saved_timetables.json'
-TO_LOAD = ['CPSC 110', 'MATH 100']
+TO_LOAD = ['CPSC 110', 'MATH 100', ]
+NUM_TABLES = 10
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
 
     scheduler = Scheduler()
     scheduler.schedule(courses, 1)
-    data = scheduler.to_dict()
+    data = scheduler.to_dict(NUM_TABLES)
     with open(SAVED_TIMETABLES_PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
