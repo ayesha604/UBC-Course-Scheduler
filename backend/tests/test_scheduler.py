@@ -126,7 +126,7 @@ if __name__ == "__main__":
     scraper = Scraper()
     scraper.set_course_names(courseToScrape)
     scraper.scrape_all_courses()
-    print(scraper.get_courses())
+    # print(scraper.get_courses())
 
     # math100Sections = getMATH100Sections()
     # phys117Sections = getPHYS117Sections()
@@ -136,13 +136,13 @@ if __name__ == "__main__":
     # phys117 = Course("PHYS 117", phys117Sections, 3)
     # phys119 = Course("PHYS 119", phys119Sections, 1)
 
-    # coursesToSchedule = scraper.get_courses().values()
-    # scheduler = Scheduler()
-    # scheduler.schedule(coursesToSchedule, 1)
-    # timetables = scheduler.getTimetables()
+    coursesToSchedule = list(scraper.get_courses().values())
+    scheduler = Scheduler()
+    scheduler.schedule(coursesToSchedule, 1)
+    timetables = scheduler.getTimetables()
 
-    # for timetable in timetables:
-    #     sections = timetable.getSections()
-    #     for section in sections:
-    #         print(f"{section.getSectionName()} : {section.getTime()}")
-    #     print()
+    for timetable in timetables:
+        sections = timetable.getSections()
+        for section in sections:
+            print(f"{section.getSectionName()} : {section.getTime()}")
+        print()

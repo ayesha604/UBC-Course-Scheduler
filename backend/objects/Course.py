@@ -1,4 +1,4 @@
-from objects.Section import *
+from objects.NewSection import *
 
 class Course:
     courseName = ""

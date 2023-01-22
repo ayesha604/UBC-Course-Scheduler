@@ -16,9 +16,9 @@ class Timetable:
 
     def addSection(self, newSection: Section) -> bool:
         """Add section to the timetable. Return true if added sucessfully, false otherwise"""
-        newSectionTime = newSection.getTime()
+        newSectionTime = newSection.times
         for section in self.sections:
-            currSectionTime = section.getTime()
+            currSectionTime = section.times
             for day in currSectionTime.keys():
                 newTime = newSectionTime.get(day)
                 currTime = currSectionTime.get(day)

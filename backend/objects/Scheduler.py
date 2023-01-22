@@ -1,6 +1,6 @@
 import itertools
 from objects.Timetable import *
-from objects.Section import *
+from objects.NewSection import *
 from objects.Course import *
 
 class Scheduler:
