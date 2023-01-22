@@ -9,7 +9,7 @@ class Scheduler:
         """create a scheduler"""
         return
 
-    def schedule(self, inputCourses: list[Course]) -> list[Timetable]:
+    def schedule(self, inputCourses: list[Course]) -> None:
         """create all possible timetables from the given courses (in order)"""
         pass
 
