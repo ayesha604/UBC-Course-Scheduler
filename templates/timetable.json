@@ -4,11 +4,11 @@
             "sections" : [{
                 "section" : {
                     "name" : "",
-                    "day" : "",
+                    "day" : ["Mon", "Th"],
                     "start-time" : "",
                     "end-time" : "",
                     "location" : "",
-                    "professors" : "",
+                    "professors" : [""],
                     "states" : ""
                 }
             }],
