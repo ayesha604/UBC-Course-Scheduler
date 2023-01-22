@@ -2,15 +2,13 @@ import json
 
 from backend.objects.Scraper import Scraper
 
-COURSES_TO_SCRAPE = ['CPSC 110', 'MATH 100', 'PHYS 117', 'CPSC 121',
-                     'PHYS 119', 'MATH 101']
+COURSES_TO_SCRAPE = ['CPSC 110', 'MATH 100', 'PHYS 117', 'CPSC 121', 'MATH 101']
 PATH = './backend/saved_json/saved_courses.json'
 
 
 def main():
     scraper = Scraper()
-    # scraper.scrape_course_list(COURSES_TO_SCRAPE)
-    scraper.scrape_course('CPSC 110')
+    scraper.scrape_course_list(COURSES_TO_SCRAPE)
     courses = scraper.get_courses()
 
     data = {}
