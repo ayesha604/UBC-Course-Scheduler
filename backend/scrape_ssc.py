@@ -1,6 +1,6 @@
 import json
 
-from backend.Scraper import Scraper
+from backend.objects.Scraper import Scraper
 
 COURSES_TO_SCRAPE = ['CPSC 110', 'MATH 100', 'PHYS 117', 'CPSC 121',
                      'PHYS 119', 'MATH 101']
