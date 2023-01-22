@@ -37,7 +37,7 @@ function getDaysFilledWith(sections, times) {
 
     // let sectionsTimeInfo = getSectionsTimeInfo(sections, times)
     sections.forEach((section, i) => {
-        section.days.forEach((day) => {
+        section.section.days.forEach((day) => {
             let startHour = parseInt(day["times"][0].split(":")[0])
             let startMinute = parseInt(day["times"][0].split(":")[1])
 
@@ -98,14 +98,14 @@ export default function Timetable({ sections, criteriaScore, num }) {
                                         return (
                                             <OverlayTrigger key={j} trigger="click" placement="right" overlay={
                                                 <Popover body>
-                                                    <h3 className="popover-heading">{sections[day[i].index]["name"]}</h3>
-                                                    <p className="popover-line"><span className="semibold">Location:</span> {sections[day[i].index]["location"]}</p>
-                                                    <p className="popover-line"><span className="semibold">Time:</span> {sections[day[i].index]["days"].find((e) => e.day === weekdaysAbbrv[j]).times.join("-")}</p>
-                                                    <p className="popover-line"><span className="semibold">Days:</span> {sections[day[i].index]["days"].map((e) => e.day).join(", ")}</p>
+                                                    <h3 className="popover-heading">{sections[day[i].index]["section"]["name"]}</h3>
+                                                    <p className="popover-line"><span className="semibold">Location:</span> {sections[day[i].index]["section"]["location"]}</p>
+                                                    <p className="popover-line"><span className="semibold">Time:</span> {sections[day[i].index]["section"]["days"].find((e) => e.day === weekdaysAbbrv[j]).times.join("-")}</p>
+                                                    <p className="popover-line"><span className="semibold">Days:</span> {sections[day[i].index]["section"]["days"].map((e) => e.day).join(", ")}</p>
                                                 </Popover>}>
                                                 <td className="section-slot" rowSpan={day[i].rowSpan} style={{ backgroundColor: sectionColors[day[i].index]}}>
-                                                    <p className="slot-title">{sections[day[i].index]["name"]}</p>
-                                                    <p className="slot-subtitle">{sections[day[i].index]["location"]}</p>
+                                                    <p className="slot-title">{sections[day[i].index]["section"]["name"]}</p>
+                                                    <p className="slot-subtitle">{sections[day[i].index]["section"]["location"]}</p>
                                                 </td>
                                             </OverlayTrigger>
                                         )

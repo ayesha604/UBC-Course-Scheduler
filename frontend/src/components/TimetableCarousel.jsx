@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Timetable from './Timetable'
 import Container from 'react-bootstrap/Container'
 import { IoTriangleSharp } from 'react-icons/io5'
@@ -28,8 +28,8 @@ export default function TimetableCarousel({ timetables }) {
                     <IoTriangleSharp />
                 </button>
                 <div className={animDirection} key={currentTimetable}>
-                    <Timetable sections={timetables[currentTimetable].sections}
-                                criteriaScore={timetables[currentTimetable].criteriaScore}
+                    <Timetable sections={timetables[currentTimetable].timetable.sections}
+                                criteriaScore={timetables[currentTimetable].timetable.score}
                                 num={currentTimetable} />
                 </div>
                 

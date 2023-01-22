@@ -11,7 +11,7 @@ const sectionColors = ["#2853C3", "#A72323", "#2D8DB7", "#7E259D", "#369D25", "#
 export default function TimetablePlaceholder() {
 
     return (
-        <div className="container" style={{padding: "5.5em"}}>
+        <div className="container" style={{paddingLeft: "5.5em", paddingRight: "5.5em"}}>
             <div>
                 <h1 style={{visibility: "hidden"}}>Timetable</h1>
                 <p style={{ visibility: "hidden" }}>Criteria score:</p>
