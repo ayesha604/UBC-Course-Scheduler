@@ -61,7 +61,7 @@ function getDaysFilledWith(sections, times) {
     return daysWithTimes
 }
 
-export default function Timetable({ sections, criteriaScore, num, sectionColor }) {
+export default function Timetable({ sections, criteriaScore, num }) {
     let criteriaScoreColor = criteriaScore > 6.6 ? "score-hi" : 
                             criteriaScore > 3.3 ? "score-med" : "score-low"
 
