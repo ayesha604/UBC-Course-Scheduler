@@ -53,12 +53,10 @@ class Scheduler:
                         else:
                             dfs(inputCourses[1:], newTimetable, targetSize)
         currTargetSize = self.SUB_MAX_TIMETABLES
-        while len(self.timetables) != self.MAX_TIMETABLES:
+        while currTargetSize != self.MAX_TIMETABLES:
             dfs(inputCourses, Timetable([], 0), currTargetSize)
             currTargetSize += self.SUB_MAX_TIMETABLES
         self.rankTimetables()
-
-        
 
     def calculateScore(self, timetable: Timetable) -> int:
         """Calculate the score for a timetable based on:
@@ -115,13 +113,11 @@ class Scheduler:
 
         return max(score,0)
 
-
     def spaceBetweenTime(self, slotOne: int, slotTwo: int) -> int:
         """Return space between two time in units of 30 minutes"""
         difference = slotOne - slotTwo
         extra = 1 if difference % 100 != 0 else 0
         return int(difference/100) + extra
-
 
     def rankTimetables(self) -> None:
         """rank the timeTables based on score (in place)"""

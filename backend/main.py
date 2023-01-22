@@ -5,8 +5,8 @@ from backend.objects.Scheduler import Scheduler
 import logging
 
 SAVED_COURSES_PATH = './backend/saved_json/saved_courses.json'
-NUM_TABLES = 10
-logging.getLogger('flask_cors').level = logging.DEBUG
+NUM_TABLES = 20
+
 
 def main():
     app = Flask(__name__)
@@ -31,11 +31,11 @@ def main():
     def schedule():
         data = request.get_json()
         course_names = data['courses']
+        term = data['term']
         courses = loader.get_courses_from_names(course_names)
         scheduler = Scheduler()
-        # TODO: pass in term
-        scheduler.schedule(courses, 1)
-        return jsonify(scheduler.to_dict(10))
+        scheduler.schedule(courses, term)
+        return jsonify(scheduler.to_dict(NUM_TABLES))
 
     app.run(debug=True, port=5000)
 
