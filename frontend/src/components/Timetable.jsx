@@ -6,7 +6,7 @@ import './Timetable.scss'
 const weekdaysAbbrv = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 // blue, rust, light blue, purple, green, magenta
-const sectionColors = ["#2853C3", "#A72323", "#2D8DB7", "#7E259D", "#369D25", "#B727BA"]
+const sectionColors = ["#2853C3", "#A72323", "#2D8DB7", "#7E259D", "#369D25", "#B727BA", "#5B2DA0", "#F76F8E", "#29524A", "#DABFFF", "#EE4266", "#F1D302", "#D16666", "#B6C649", "#2C4251", "#A1E887", "#ABA194"]
 
 function makeTimes() {
     let times = []

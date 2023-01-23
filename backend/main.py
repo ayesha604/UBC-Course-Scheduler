@@ -20,7 +20,7 @@ def main():
     @cross_origin()
     def valid_courses():
         course_names1 = loader.get_course_names_term(1)
-        course_names2 = loader.get_course_names_term(1)
+        course_names2 = loader.get_course_names_term(2)
         response = {"Term 1": course_names1,
                     "Term 2": course_names2}
         return jsonify(response)
